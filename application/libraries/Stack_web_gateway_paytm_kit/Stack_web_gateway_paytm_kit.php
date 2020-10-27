@@ -37,7 +37,7 @@ class Stack_web_gateway_paytm_kit{
 		//=================================================
 
 		/* $PAYTM_ENVIRONMENT = "PROD"; */	// For Production /LIVE
-		$PAYTM_ENVIRONMENT = "TEST";	// For Staging / TEST
+		$PAYTM_ENVIRONMENT = "PROD";	// For Staging / TEST
 
 		if(!defined("PAYTM_ENVIRONMENT") ){
 			define('PAYTM_ENVIRONMENT', $PAYTM_ENVIRONMENT); 
@@ -65,20 +65,20 @@ class Stack_web_gateway_paytm_kit{
 			
 			
 		}
-		/*
-		 * Yusuf Bhai
+
+		 /** Yusuf Bhai*/
 			$PAYTM_MERCHANT_MID 		= "hmaXpo27892858768323";
 			$PAYTM_MERCHANT_KEY 		= "imTqdhjjbCzupqTG";
 			$PAYTM_CHANNEL_ID 		= "WEB";
 			$PAYTM_INDUSTRY_TYPE_ID = "Retail";
 			$PAYTM_MERCHANT_WEBSITE = "DEFAULT";
-		*/
 
-		$PAYTM_MERCHANT_MID 		= "FXBMtL94740813379163";
+
+		/*$PAYTM_MERCHANT_MID 		= "FXBMtL94740813379163";
 		$PAYTM_MERCHANT_KEY 		= "bCu!yJCdOLkI4s!p";
 		$PAYTM_CHANNEL_ID 		= "WEB";
 		$PAYTM_INDUSTRY_TYPE_ID = "Retail";
-		$PAYTM_MERCHANT_WEBSITE = "DEFAULT";
+		$PAYTM_MERCHANT_WEBSITE = "DEFAULT";*/
 
 //		$PAYTM_CALLBACK_URL 	= "https://sparklingbeauty.in/Payment_by_paytm/paytm_response";
 		$PAYTM_CALLBACK_URL 	= base_url("Payment_by_paytm/paytm_response");

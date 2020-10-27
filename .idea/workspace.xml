@@ -19,23 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44b7bd92-adaa-4c9e-b4eb-fc74f5d90870" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/application/views/payment_fail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/views/payment_success.php" afterDir="false" />
+    <list default="true" id="44b7bd92-adaa-4c9e-b4eb-fc74f5d90870" name="Default Changelist" comment="Price Promotion &#10;Cod Remove&#10;Paytm repair&#10;price slider&#10;Rating and review done&#10;Facebook share option in the view product">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/config/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/BackPanel/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/BackPanel/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Cart.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Payment_by_paytm.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Payment_by_paytm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/libraries/Stack_web_gateway_paytm_kit/Stack_web_gateway_paytm_kit.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/libraries/Stack_web_gateway_paytm_kit/Stack_web_gateway_paytm_kit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/BackPanel/add_product.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/BackPanel/add_product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/checkout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/product-detail.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/product-detail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/product.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/views/wishlist.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/wishlist.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front_assets/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/front_assets/js/custom.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,8 +70,16 @@
       <workItem from="1603188463685" duration="78000" />
       <workItem from="1603212586201" duration="4226000" />
       <workItem from="1603733078911" duration="11041000" />
-      <workItem from="1603746853941" duration="10678000" />
+      <workItem from="1603746853941" duration="10854000" />
     </task>
+    <task id="LOCAL-00001" summary="Price Promotion &#10;Cod Remove&#10;Paytm repair&#10;price slider&#10;Rating and review done&#10;Facebook share option in the view product">
+      <created>1603757695385</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1603757695385</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,6 +96,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Price Promotion &#10;Cod Remove&#10;Paytm repair&#10;price slider&#10;Rating and review done&#10;Facebook share option in the view product" />
+    <option name="LAST_COMMIT_MESSAGE" value="Price Promotion &#10;Cod Remove&#10;Paytm repair&#10;price slider&#10;Rating and review done&#10;Facebook share option in the view product" />
   </component>
   <component name="WindowStateProjectService">
     <state x="438" y="187" key="#Notifications" timestamp="1602325632414">
@@ -132,11 +130,11 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="347" y="174" key="run.anything.popup/0.27.1366.741@0.27.1366.741" timestamp="1603740963591" />
-    <state x="346" y="77" width="672" height="691" key="search.everywhere.popup" timestamp="1603753347685">
+    <state x="346" y="77" width="672" height="691" key="search.everywhere.popup" timestamp="1603757711615">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1603216471445" />
-    <state x="346" y="77" width="672" height="691" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1603753347685" />
+    <state x="346" y="77" width="672" height="691" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1603757711615" />
     <state x="346" y="78" width="672" height="690" key="search.everywhere.popup/0.28.1366.740@0.28.1366.740" timestamp="1603722381069" />
   </component>
 </project>
