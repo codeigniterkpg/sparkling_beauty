@@ -174,10 +174,10 @@
 
                     values: [i, a],
 
-                    step: 10,
+                    step: 1,
 
                     slide: function(i, a) {
-
+                        console.log(a.values);
                         e("#price-range-from-to").html("Price : <span class='from'>₹" + a.values[0] + "</span> &mdash; <span class='to'>₹" + a.values[1]), e("#price_range_min").val(a.values[0]), e("#price_range_max").val(a.values[1])
 
                     }

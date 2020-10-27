@@ -60,7 +60,7 @@ class Product extends CI_Controller
         $data_color = $exec->result_array();
         $html = '<div class="row" id="add' . $cnt . '">';
 
-        $html .= '<div class="form-group col-md-3">
+        $html .= '<div class="form-group col-md-2">
 						<label for="exampleInputname">Color</label>
 						<select class="form-control" name="color[]" id="color">
 							<option value="0">Select Color</option>';
@@ -80,9 +80,13 @@ class Product extends CI_Controller
 						<input class="form-control" name="quantity[]" id="quantity" value="1">
 					</div>';
         $html .= '
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label for="exampleInputname">Price</label>
 						<input name="price[]" id="price[]" type="text" placeholder="Price" class="form-control prices"/>
+					</div>
+					<div class="form-group col-md-2">
+						<label>Promotion Price</label>
+						<input name="promotion_price[]" id="promotion_price[]" type="text" placeholder="Promotion Price" class="form-control"/>
 					</div>
 					<div class="form-group col-md-1">
 						<label for="exampleInputname"></label><br>';
@@ -109,7 +113,7 @@ class Product extends CI_Controller
         $len = count($data);
         foreach ($data as $dts) {
             $html .= '<div class="row" id="add' . $cnt . '">';
-            $html .= '<div class="form-group col-md-3">
+            $html .= '<div class="form-group col-md-2">
 						<label for="exampleInputname">Color</label>
 						<select class="form-control" name="color[]" id="color">
 							<option value="0">Select Color</option>';
@@ -136,9 +140,13 @@ class Product extends CI_Controller
 
 
             $html .= '
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<label for="exampleInputname">Price</label>
 						<input name="price[]" id="price[]" type="text" placeholder="Price" value="' . $dts['tpd_price'] . '" class="form-control prices"/>
+					</div>
+					<div class="form-group col-md-2">
+						<label>Promotion Price</label>
+						<input name="promotion_price[]" id="promotion_price" type="text" placeholder="Promotion Price" class="form-control" value="' . $dts['promotion_price'] . '"/>
 					</div>
 					<div class="form-group col-md-1">
 						<label for="exampleInputname"></label><br>';
@@ -339,6 +347,7 @@ class Product extends CI_Controller
                     }
                     $this->db->where('tpd_product_id', $id);
                     $this->db->delete('tbl_product_data');
+                    $promotion_price = $this->input->post('promotion_price');
                     $weight = $this->input->post('weight');
                     $quantity = $this->input->post('quantity');
                     $color = $this->input->post('color');
@@ -353,6 +362,7 @@ class Product extends CI_Controller
                             $size_array[$i]['tpd_price'] = $price[$i];
                             $size_array[$i]['tpd_gst_type'] = $gst_type;
                             $size_array[$i]['tpd_gst_perce'] = $gst_perce;
+                            $size_array[$i]['promotion_price'] = $promotion_price[$i];
                             $size_array[$i]['tpd_gst_amount'] = round(intval($price[$i]) * $gst_perce / 100);
                         }
                         if (!empty($size_array)) {
@@ -400,6 +410,7 @@ class Product extends CI_Controller
                         }
                     }
                     /*---------Upload Image end------------*/
+                    $promotion_price = $this->input->post('promotion_price');
                     $weight = $this->input->post('weight');
                     $quantity = $this->input->post('quantity');
                     $color = $this->input->post('color');
@@ -408,6 +419,7 @@ class Product extends CI_Controller
                         $size_array = array();
                         for ($i = 0; $i < sizeof($weight); $i++) {
                             $size_array[$i]['tpd_product_id'] = $insert_product_id;
+                            $size_array[$i]['promotion_price'] = $promotion_price[$i];
                             $size_array[$i]['tpd_weight'] = $weight[$i];
                             $size_array[$i]['tpd_qty'] = $quantity[$i];
                             $size_array[$i]['tpd_color_id'] = $color[$i];

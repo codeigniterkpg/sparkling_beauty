@@ -37,7 +37,7 @@ class Stack_web_gateway_paytm_kit{
 		//=================================================
 
 		/* $PAYTM_ENVIRONMENT = "PROD"; */	// For Production /LIVE
-		$PAYTM_ENVIRONMENT = "PROD";	// For Staging / TEST
+		$PAYTM_ENVIRONMENT = "TEST";	// For Staging / TEST
 
 		if(!defined("PAYTM_ENVIRONMENT") ){
 			define('PAYTM_ENVIRONMENT', $PAYTM_ENVIRONMENT); 
@@ -56,22 +56,33 @@ class Stack_web_gateway_paytm_kit{
 			//===================================================
 			//	For Staging or TEST Credentials
 			//===================================================
-			$PAYTM_STATUS_QUERY_NEW_URL='https://securegw-stage.paytm.in/merchant-status/getTxnStatus';
-			$PAYTM_TXN_URL='https://securegw-stage.paytm.in/theia/processTransaction';
+			/*$PAYTM_STATUS_QUERY_NEW_URL='https://securegw-stage.paytm.in/merchant-status/getTxnStatus';
+			$PAYTM_TXN_URL='https://securegw-stage.paytm.in/theia/processTransaction';*/
+			$PAYTM_STATUS_QUERY_NEW_URL='https://securegw-stage.paytm.in/order/status';
+			$PAYTM_TXN_URL='https://securegw-stage.paytm.in/order/process';
 
 			//Change this constant's value with Merchant key received from Paytm.
 			
 			
 		}
-		$PAYTM_MERCHANT_MID 		= "hmaXpo27892858768323";
-		$PAYTM_MERCHANT_KEY 		= "imTqdhjjbCzupqTG";
+		/*
+		 * Yusuf Bhai
+			$PAYTM_MERCHANT_MID 		= "hmaXpo27892858768323";
+			$PAYTM_MERCHANT_KEY 		= "imTqdhjjbCzupqTG";
+			$PAYTM_CHANNEL_ID 		= "WEB";
+			$PAYTM_INDUSTRY_TYPE_ID = "Retail";
+			$PAYTM_MERCHANT_WEBSITE = "DEFAULT";
+		*/
 
+		$PAYTM_MERCHANT_MID 		= "FXBMtL94740813379163";
+		$PAYTM_MERCHANT_KEY 		= "bCu!yJCdOLkI4s!p";
 		$PAYTM_CHANNEL_ID 		= "WEB";
 		$PAYTM_INDUSTRY_TYPE_ID = "Retail";
 		$PAYTM_MERCHANT_WEBSITE = "DEFAULT";
 
-		$PAYTM_CALLBACK_URL 	= "https://sparklingbeauty.in/Payment_by_paytm/paytm_response";
-		define('PAYTM_MERCHANT_KEY', $PAYTM_MERCHANT_KEY); 
+//		$PAYTM_CALLBACK_URL 	= "https://sparklingbeauty.in/Payment_by_paytm/paytm_response";
+		$PAYTM_CALLBACK_URL 	= base_url("Payment_by_paytm/paytm_response");
+		define('PAYTM_MERCHANT_KEY', $PAYTM_MERCHANT_KEY);
 		define('PAYTM_MERCHANT_MID', $PAYTM_MERCHANT_MID);
 
 		define("PAYTM_MERCHANT_WEBSITE", $PAYTM_MERCHANT_WEBSITE);

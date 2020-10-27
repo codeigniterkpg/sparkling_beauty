@@ -261,15 +261,15 @@ $rsAssignModules = $CI->Sidemenu_model->getAssignModule(); */
                                 </ul>
                             </li>
 							<?php } ?>
-							<?php 
+							<?php /*
 							$this->db->order_by('cms_id', 'asc');
 							$q1 = $this->db->get('tbl_cms');
 							foreach($q1->result_array() as $cs){
-							?>
+							*/?><!--
 							<li>
-                                <a href="<?php echo base_url().$cs['cms_url'];?>"><?php echo $cs['cms_title']?></a>
+                                <a href="<?php /*echo base_url().$cs['cms_url'];*/?>"><?php /*echo $cs['cms_title']*/?></a>
                             </li>
-							<?php } ?>
+							--><?php /*} */?>
                         </ul>
                     </nav>
                     <!-- End Navigation Menu -->

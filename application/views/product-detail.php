@@ -1,5 +1,8 @@
 <?php include("header.php");?>
-
+<!--Facebook Start-->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v8.0" nonce="yTZDuUbh"></script>
+<!--Facebook Stop-->
 
  <!-- Page Content Wraper -->
         <div class="page-content-wraper">
@@ -66,20 +69,25 @@
                                 <div class="product-price">
 								<?php 
 								if(!empty($Sizes)){
-									$prices=$Sizes[0]['tpd_price'];
-								}else{
-									$prices=$Detail[0]['tp_price'];
+                                    $prices=$Sizes[0]['tpd_price'];
+                                    $promotion_price = $Sizes[0]['promotion_price'];
+                                }else{
+                                    $prices=$Detail[0]['tp_price'];
+                                    $promotion_price = 0;
 								}
 								if($Detail[0]['tp_gst_type']==2){
-									$gst_amount=round($prices*$Detail[0]['tp_gst_perce']/100);
-									$final_price=$prices;
-								}else{
-									$gst_amount=round($prices*$Detail[0]['tp_gst_perce']/100);
-									$final_price=$prices+$gst_amount;
-								}
+                                    $gst_amount=round($prices*$Detail[0]['tp_gst_perce']/100);
+                                    $final_price=$prices;
+                                    $final_promotion_price = $promotion_price;
+                                }else{
+                                    $gst_amount=round($prices*$Detail[0]['tp_gst_perce']/100);
+                                    $final_price=$prices+$gst_amount;
+                                    $promotion_price_gst = round($promotion_price*$Detail[0]['tp_gst_perce']/100);
+                                    $final_promotion_price = $promotion_price + $promotion_price_gst;
+                                }
 								
 									?>
-                                   <span><span class="product-price-sign">₹</span><span class="product-price-text" id="pro_price"><?php echo $final_price;?></span></span>
+                                    <span class="product-price-sign">₹</span><span class="product-price-text" id="pro_price"><?php echo $final_price;?></span> <span ><?php echo $final_price < $final_promotion_price ? ('<s style="font-size: 20px !important;">'.$final_promotion_price.'</s>') : ''?></span>
 									<input type="hidden" id="price_product" value="<?php echo $final_price;?>">
 									<input type="hidden" id="gst_type" value="<?php echo $Detail[0]['tp_gst_type'];?>">
 									<input type="hidden" id="gst_perce" value="<?php echo $Detail[0]['tp_gst_perce'];?>">
@@ -100,6 +108,7 @@
                                     <button type="button" onclick="add_to_cart(<?php echo $Detail[0]['tp_id']?>,'<?php echo $final_price;?>','<?php echo $prices;?>','<?php echo $gst_amount?>','<?php echo $Detail[0]['tp_gst_type']?>','<?php echo $Detail[0]['tp_gst_perce']?>')" class="btn btn-lg btn-black"><i class="fa fa-shopping-bag" aria-hidden="true"></i>Add to cart</button>
                                     <?php $link = b2b($Detail[0]['tp_name'], $Detail[0]['tp_id'], $final_price);?>
                                     <a href="<?= $link;?>" target="_blank" class="btn-lg text-white" style="background: #0000cc; padding: 8px 20px !important; border-radius: 30px;"><i class="fa fa-whatsapp"></i>B2B Inquiry</a>
+                                    <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
                                 </form>
                                 <div class="single-add-to-wrap">
 								<?php $customer_data=$this->session->userdata('customer_data');

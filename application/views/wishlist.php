@@ -87,11 +87,7 @@
                                                         <span class="product-price-amount amount"><span class="currency-sign">₹</span><?php echo $final_price;?></span>
                                                     </td>
                                                    <td>
-													<?php if($cd['tp_size_category']>0){?>
-														<a href="<?php echo base_url('shop/').$cd['tp_slug'];?>"><button type="button" class="btn btn-lg btn-black"><i class="fa fa-shopping-bag" aria-hidden="true"></i></button></a>
-													<?php }else{ ?>
-														<button type="button" onclick="add_to_cart(<?php echo $cd['tp_id']?>,'<?php echo $final_price;?>','<?php echo $price;?>','<?php echo $gst_amount;?>','<?php echo $gst_type;?>','<?php echo $gst_perce;?>')" class="btn btn-lg btn-black"><i class="fa fa-shopping-bag" aria-hidden="true"></i></button>
-													<?php } ?>
+                                                       <button type="button" onclick="add_to_cart(<?php echo $cd['tp_id']?>,'<?php echo $final_price;?>','<?php echo $price;?>','<?php echo $gst_amount;?>','<?php echo $gst_type;?>','<?php echo $gst_perce;?>')" class="btn btn-lg btn-black"><i class="fa fa-shopping-bag" aria-hidden="true"></i></button>
                                                    </td>
                                                 </tr>
                                                 <?php } ?>

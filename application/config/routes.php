@@ -67,9 +67,11 @@ $route["product-category/(:any)/(:any)/(:any)"]      = "Product/index/$1/$2/$3";
 
 $route["shop/(:any)"]      = "Product/Detail/$1";
 $route["cart"] = "Cart/index";
-$route["checkout"] = "Cart/checkout";
-$route["wishlist"] = "WishList/wishlist";
-$route["(:any)"]      = "Home/CMSDetail/$1";
+$route["checkout"]          = "Cart/checkout";
+$route["wishlist"]          = "WishList/wishlist";
+$route["payment-success"]   = "Cart/PaymentSuccess";
+$route["payment-fail"]      = "Cart/PaymentFail";
+$route["(:any)"]            = "Home/CMSDetail/$1";
 /*front-page*/
 /* $route["get-product-by-category"]["POST"]   = "product/get_product_by_category";
 $route["my-product/page/(:any)"]["GET"]     = "product/my_product/$1";

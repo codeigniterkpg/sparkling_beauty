@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="44b7bd92-adaa-4c9e-b4eb-fc74f5d90870" name="Default Changelist" comment="" />
+    <list default="true" id="44b7bd92-adaa-4c9e-b4eb-fc74f5d90870" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/application/views/payment_fail.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/views/payment_success.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/config/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/config/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/BackPanel/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/BackPanel/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Payment_by_paytm.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Payment_by_paytm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/libraries/Stack_web_gateway_paytm_kit/Stack_web_gateway_paytm_kit.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/libraries/Stack_web_gateway_paytm_kit/Stack_web_gateway_paytm_kit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/BackPanel/add_product.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/BackPanel/add_product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/checkout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/product-detail.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/product-detail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/product.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/views/wishlist.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/views/wishlist.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_assets/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/front_assets/js/custom.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,7 +46,11 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1iJR0Yv1SP0Ku0WTXOCEazi1J9V" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -21,6 +60,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -43,11 +83,25 @@
       <workItem from="1603112781747" duration="9532000" />
       <workItem from="1603188463685" duration="78000" />
       <workItem from="1603212586201" duration="4226000" />
+      <workItem from="1603733078911" duration="11041000" />
+      <workItem from="1603746853941" duration="10678000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="438" y="187" key="#Notifications" timestamp="1602325632414">
@@ -66,9 +120,23 @@
       <screen x="0" y="0" width="1366" height="724" />
     </state>
     <state x="466" y="133" width="424" height="491" key="FileChooserDialogImpl/0.0.1366.724@0.0.1366.724" timestamp="1601638120557" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1603216471445">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="172" y="31" width="1022" height="737" key="SettingsEditor" timestamp="1603733154844">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="172" y="31" width="1022" height="737" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1603733154844" />
+    <state x="0" y="27" width="607" height="741" key="find.popup" timestamp="1603756738845">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="0" y="27" width="607" height="741" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1603756738845" />
+    <state x="347" y="174" key="run.anything.popup" timestamp="1603740963591">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="347" y="174" key="run.anything.popup/0.27.1366.741@0.27.1366.741" timestamp="1603740963591" />
+    <state x="346" y="77" width="672" height="691" key="search.everywhere.popup" timestamp="1603753347685">
+      <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1603216471445" />
+    <state x="346" y="77" width="672" height="691" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1603753347685" />
+    <state x="346" y="78" width="672" height="690" key="search.everywhere.popup/0.28.1366.740@0.28.1366.740" timestamp="1603722381069" />
   </component>
 </project>

@@ -332,7 +332,7 @@
 
         /* ------------ Add New Elements Start------------------ */
         let UriSegment = "<?php echo $this->uri->segment(3)?>";
-        if (UriSegment === 'AddProduct' || UriSegment === 'edit') {
+        if (UriSegment === 'AddProduct') {
             add_new_div();
         }
         function add_new_div() {

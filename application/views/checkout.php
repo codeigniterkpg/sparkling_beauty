@@ -29,7 +29,7 @@
                                 <p class="checkout-info">
                                     Have a coupon? <strong><a href="#">Click here to enter your code</a></strong>
                                 </p>-->
-								<form id="checkout_form" action="" method="post">
+								<form id="checkout_form" action="<?php echo base_url("Payment_by_paytm/payby_paytm");?>" method="post">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h3>Billing details</h3>
@@ -188,7 +188,7 @@
                                                         </table>
                                                     </div>
                                                     <div class="product-checkout-payment">
-                                                       <ul>
+                                                       <!--<ul>
                                                             <li>
                                                                 
                                                                 <div class="payment_box payment_method_bacs">
@@ -200,13 +200,14 @@
                                                                 <label for="payment_method_cheque">COD</label>
                                                             </li>
                                                             <li>
-                                                                <input id="payment_method_cod" name="payment_method" value="paytm" type="radio" />
+
                                                                 <label for="payment_method_cod">Paytm</label>
                                                             </li>
                                                             
-                                                        </ul>
+                                                        </ul>-->
+                                                        <input  id="payment_method_cod" name="payment_method" value="paytm" type="hidden" />
                                                         <div class="place-order">
-                                                            <input class="btn btn-lg btn-color form-full-width" type="submit" value="Place Order">
+                                                            <button class="btn btn-lg btn-color form-full-width" type="submit" value="<?php echo ($total+$shipping);?>" style="font-weight: 700">Pay <i class="fa fa-rupee"></i> <?php echo ($total+$shipping);?></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -263,35 +264,25 @@ $( document ).ready( function () {
 				},
 				
 				submitHandler: function (form) {
-					
                     showload();
+
 					$.ajax({
-						url: '<?php echo base_url('Cart/PlaceOrder');?>',
+						url: '<?php echo base_url('Cart/GenerateOrderID');?>',
 						type: "POST",
-						data: new FormData(form),
+						data: $("#checkout_form").serialize(),
 						dataType: 'json',
-						contentType: false,
-						cache: false,
-						processData: false,
 						success: function (response) {
 							if (response.status == true) {
 								hideload();
 								toast_msg('Success',response.message,'success');
-								var radioValue = $("input[name='payment_method']:checked").val();
-								if(radioValue=='paytm'){
-									window.location.href = "<?php echo base_url("Payment_by_paytm/payby_paytm");?>";
-								}else{
-									setTimeout(function () {
-										window.location.href = "<?php echo base_url('my-orders');?>";
-									}, 1000); 
-								}								
+                                form.submit();
 							} else {
 								hideload();
 								toast_msg('Error',response.message,'error');
 							}
 							
 						}
-					});   
+					});
                 },
 				errorElement: "em",
 				errorPlacement: function ( error, element ) {

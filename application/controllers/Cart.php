@@ -252,137 +252,52 @@ class Cart extends CI_Controller {
 		}
 		echo json_encode($response);
 	}
-	public function PlaceOrder()
-	{
-		$customer_data=$this->session->userdata('customer_data');
-		if(empty($customer_data)){
-			redirect(base_url('Login'));
-		}else{
-			$customer_id=$this->session->userdata('customer_data')[0]['tc_id'];
-		}
-		$this->db->select('tbl_color.tclr_title,tbl_product.tp_name,tbl_cart.*');
-		$this->db->join('tbl_color', 'tbl_color.tclr_id = tbl_cart.cr_color ','left');		
-		/*$this->db->join('tbl_size_master', 'tbl_size_master.tsm_id = tbl_cart.cr_size ','left');*/
-		$this->db->join('tbl_product', 'tbl_product.tp_id = tbl_cart.cr_product_id ','left');		
-		$this->db->where('cr_cust_id',$customer_id);
-		$exe_cart=$this->db->get('tbl_cart');
-		$cart_data=$exe_cart->result_array();
-		if(!empty($cart_data)){
-			if($this->input->post('payment_method')=='cod'){
-				$this->db->where('o_invoice_no !=','');
-				$this->db->order_by('o_id','desc');
-				$this->db->limit('1');
-				$exe_inv=$this->db->get('tbl_order');
-				$data_inv=$exe_inv->result_array();
-				
-				if(!empty($data_inv)){
-					$current_year=date('y');
-					$current_month=date('m');
-					if($current_month>=1 and $current_month<=3){
-						$temp_year=$current_year-1;
-						$final_year=$temp_year."-".$current_year;
-					}else{
-						$temp_year=$current_year+1;
-						$final_year=$current_year."-".$temp_year;
-					}
-					
-					$inv=$data_inv[0]['o_invoice_no'];
-					$exp_inv=explode('/',$inv);
-					$last_year=$exp_inv[0];
-					$last_invoice=$exp_inv[1];
-					if($last_year==$final_year){
-						$no=$last_invoice+'0001';
-						$num_padded = sprintf("%04d", $no);
-						$final_invoice=$final_year."/".$num_padded;
-					}else{
-						$no='0001';
-						$final_invoice=$final_year."/".$no;
-					}
-					$insert_data["o_invoice_no"]=$final_invoice;
-				}else{
-					$current_year=date('y');
-					$current_month=date('m');
-					if($current_month>=1 and $current_month<=3){
-						$temp_year=$current_year-1;
-						$final_year=$temp_year."-".$current_year;
-					}else{
-						$temp_year=$current_year+1;
-						$final_year=$current_year."-".$temp_year;
-					}
-					$no='0001';
-					$final_invoice=$final_year."/".$no;
-					$insert_data["o_invoice_no"]=$final_invoice;
-				}
-			}
-			$insert_data["o_cust_id"]=$customer_id;
-			$insert_data["o_discount_amount"]=$this->input->post('discount');
-			$insert_data["o_shipping_charge"]=$this->input->post('shipping');
-			$insert_data["o_sub_total"]=$this->input->post('sub_total');
-			$insert_data["o_tax"]=$this->input->post('tax');
-			$insert_data["o_grand_total"]=$this->input->post('total');
-			$insert_data["o_date"]=date('Y-m-d');
-			$insert_data["o_name"]=$this->input->post('tca_name');
-			$insert_data["o_phone"]=$this->input->post('tca_phone');
-			$insert_data["o_email"]=$this->input->post('tca_email');
-			$insert_data["o_address"]=$this->input->post('tca_street_address');
-			$insert_data["o_address1"]=$this->input->post('tca_street_address1');
-			$insert_data["o_company_name"]=$this->input->post('tca_company_name');
-			$insert_data["o_town"]=$this->input->post('tca_town');
-			$insert_data["o_state"]=$this->input->post('tca_state');
-			$insert_data["o_postcode"]=$this->input->post('tca_postcode');
-			$save_order=$this->db->insert('tbl_order',$insert_data);
-			$insert_id = $this->db->insert_id();
-			$this->session->set_userdata('order_id', $insert_id);
-			$this->session->set_userdata('cust_id', $customer_id);
-			$this->session->set_userdata('order_amount', $this->input->post('total'));
-			$this->session->set_userdata('order_email', $this->input->post('tca_email'));
-			$this->session->set_userdata('order_phone', $this->input->post('tca_phone'));
-			if($save_order){
-				foreach($cart_data as $cd){
-					if(isset($cd['tsm_size'])){
-						$size=$cd['tsm_size'];
-					}else{
-						$size="Regular";
-					}
-					if(isset($cd['tsm_size'])){
-						$color=$cd['tsm_size'];
-					}else{
-						$color="Regular";
-					}
-					$order_data=array(
-							"oi_order_id"=>$insert_id,
-							"oi_product_id"=>$cd['cr_product_id'],
-							"oi_product_name"=>$cd['tp_name'],
-							"oi_size_category"=>$cd['tp_size_category'],
-							"oi_size"=>$size,
-							"oi_color"=>$color,
-							"oi_qty"=>$cd['cr_qty'],
-							"oi_gst_type"=>$cd['cr_gst_type'],
-							"oi_gst_perce"=>$cd['cr_gst_perce'],
-							"oi_gst_amount"=>$cd['cr_gst_amount'],
-							"oi_mrp"=>$cd['cr_mrp'],
-							"oi_price"=>$cd['cr_price'],
-							"oi_amount"=>$cd['cr_amount']
-					);
-					$save_order_item=$this->db->insert('tbl_order_item',$order_data);
-				}
-				$response = ["status" => true, "message" => "Your order has been placed successfully."];
-				
-				$this->db->where('cr_cust_id',$customer_id);
-				$this->db->delete('tbl_cart');
-				
-			}else{
-				$response = ["status" => false, "message" => "Unable to place your order."];
-				echo json_encode($response);
-			}
-		}else{
-			$response = ["status" => false, "message" => "Your cart is empty, Please add items to your cart."];
-			echo json_encode($response);
-		}
-		
-		
-		echo json_encode($response);
-	}
+
+	public function GenerateOrderID() {
+        $customer_data=$this->session->userdata('customer_data');
+        if($customer_data) {
+            $customer_id=$this->session->userdata('customer_data')[0]['tc_id'];
+            $this->db->select('tbl_color.tclr_title,tbl_product.tp_name,tbl_cart.*');
+            $this->db->join('tbl_color', 'tbl_color.tclr_id = tbl_cart.cr_color ','left');
+            $this->db->join('tbl_product', 'tbl_product.tp_id = tbl_cart.cr_product_id ','left');
+            $this->db->where('cr_cust_id',$customer_id);
+            $exe_cart=$this->db->get('tbl_cart');
+            $cart_data=$exe_cart->result_array();
+            if (!empty($cart_data)) {
+                $Order = $this->db->select("o_id")->order_by("o_id","DESC")->get("tbl_order")->row();
+                if(!empty($Order)) {
+                    $order_id = $Order->o_id + 1;
+                    $order_id = $order_id + rand(1,999999);
+                } else {
+                    $order_id = rand(1,999999);
+                }
+                $this->session->set_userdata('order_id', $order_id);
+                $this->session->set_userdata('cust_id', $customer_id);
+                $this->session->set_userdata('order_amount', $this->input->post('total'));
+                $this->session->set_userdata('order_email', $this->input->post('tca_email'));
+                $this->session->set_userdata('order_phone', $this->input->post('tca_phone'));
+                $OrderPostData = $this->input->post();
+                $this->session->set_userdata("OrderPostData", $OrderPostData);
+                $response = ["status" => true, "message" => "Your order has been placed successfully."];
+            } else {
+                $response = ["status" => false, "message" => "Your cart is empty."];
+            }
+        } else {
+            $response = ["status" => false, "message" => "Please login first!"];
+        }
+        echo json_encode($response);
+    }
+
+    public function UpdateOrderData() {
+        $customer_data=$this->session->userdata('customer_data');
+        if(!empty($customer_data)){
+            $this->db->where('o_id', $$this->session->userdata('order_id'));
+            $this->db->update('tbl_order', $_POST);
+            echo "TRUE";
+        }
+        echo "FALSE";
+    }
+
 	public function Details()
 	{
 		$id=$this->input->post('id');
@@ -1148,6 +1063,22 @@ class Cart extends CI_Controller {
 			$images[] = $this->upload->data()['file_name'];
         }
         return $images;
+    }
+
+    public function PaymentSuccess() {
+	    if ($this->session->userdata("PAYTM_DATA")) {
+	        $pass = array(
+	            "pay" => $this->session->userdata("PAYTM_DATA")
+            );
+            $this->load->view("payment_success", $pass);
+        } else {
+	        redirect(base_url());
+        }
+    }
+
+    public function PaymentFail() {
+//	    echo "Payment Fail";
+        $this->load->view("payment_fail");
     }
 }
 ?>

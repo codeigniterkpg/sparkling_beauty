@@ -65,8 +65,9 @@ class Product extends CI_Controller {
 		/*---------Image-------------*/
 		
 		$pass['Images']=$this->AllImage();
-		$pass['Sizes']=$this->AllSize();
-		$pass['MaxPrice']=max($pass['Sizes']);
+		$Size = $this->AllSize(true);
+		$pass['Sizes']=$Size[1];
+		$pass['MaxPrice']=max($Size[0]);
 		$pass['Cat']=$cat;
 		$pass['Search']='';
 		$pass['Cat1']=$cat1;
@@ -186,9 +187,11 @@ class Product extends CI_Controller {
 		  foreach($result as $lt){	
 				if($lt['tpd_gst_type']==2){
 					$final_price=$lt['tpd_price'];
-				}else{
-					$final_price=$lt['tpd_price']+$lt['tpd_gst_amount'];
-				}
+					$promotion_price = $lt['promotion_price'];
+                }else{
+                    $final_price=$lt['tpd_price']+$lt['tpd_gst_amount'];
+                    $promotion_price = $lt['promotion_price'] + $lt['tpd_gst_amount'];
+                }
 				$html.='<div class="product-item-element col-sm-6 col-md-6 col-lg-4">
                                     <div class="product-item">
                                         <div class="product-item-inner">
@@ -229,7 +232,7 @@ class Product extends CI_Controller {
                                             <p class="product-title"><a href="'.base_url('shop/').$lt['tp_slug'].'">'.$string.'</a></p>
                                             
                                             <p class="product-description">'.$lt['tp_desc'].'</p>
-                                            <h5 class="item-price">₹'.$final_price.'</h5>
+                                            <h5 class="item-price">₹'.$final_price. ($final_price < $promotion_price ? (' <s style="font-size:15px !important; ">'.$promotion_price.'</s>') : '') . '</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -354,16 +357,18 @@ class Product extends CI_Controller {
 		}
 		return $pro_image;
 	}
-	public function AllSize(){
-		$this->db->select('tpd_price,tpd_product_id');
+	public function AllSize($both = false){
+		$this->db->select('tpd_price,tpd_product_id,promotion_price');
 		$this->db->group_by('tpd_product_id');
 		$this->db->order_by('tpd_id','asc');
 		$exe_size=$this->db->get('tbl_product_data');
 		$pro_sizes=array();
+		$sizes = array();
 		foreach($exe_size->result_array() as $ei){
-			$pro_sizes[$ei['tpd_product_id']]=$ei['tpd_price'];
+			$pro_sizes[$ei['tpd_product_id']]=array($ei['tpd_price'],$ei['promotion_price']);
+            $sizes[] = $ei['tpd_price'];
 		}
-		return $pro_sizes;
+		return $both ? array($sizes,$pro_sizes) : $pro_sizes;
 	}
 	public function getCategory($id){
 		$this->db->where('cat_subcat_id',$id);
