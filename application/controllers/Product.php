@@ -67,7 +67,7 @@ class Product extends CI_Controller {
 		$pass['Images']=$this->AllImage();
 		$Size = $this->AllSize(true);
 		$pass['Sizes']=$Size[1];
-		$pass['MaxPrice']=max($Size[0]);
+		$pass['MaxPrice']= !empty($Size[0]) ? max($Size[0]) : 0;
 		$pass['Cat']=$cat;
 		$pass['Search']='';
 		$pass['Cat1']=$cat1;

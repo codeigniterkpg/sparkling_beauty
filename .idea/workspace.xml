@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="44b7bd92-adaa-4c9e-b4eb-fc74f5d90870" name="Default Changelist" comment="Price Promotion &#10;Cod Remove&#10;Paytm repair&#10;price slider&#10;Rating and review done&#10;Facebook share option in the view product">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/libraries/Stack_web_gateway_paytm_kit/Stack_web_gateway_paytm_kit.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/libraries/Stack_web_gateway_paytm_kit/Stack_web_gateway_paytm_kit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/controllers/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/controllers/Product.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +70,7 @@
       <workItem from="1603188463685" duration="78000" />
       <workItem from="1603212586201" duration="4226000" />
       <workItem from="1603733078911" duration="11041000" />
-      <workItem from="1603746853941" duration="10854000" />
+      <workItem from="1603746853941" duration="11350000" />
     </task>
     <task id="LOCAL-00001" summary="Price Promotion &#10;Cod Remove&#10;Paytm repair&#10;price slider&#10;Rating and review done&#10;Facebook share option in the view product">
       <created>1603757695385</created>
@@ -79,7 +79,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603757695385</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Price Promotion &#10;Cod Remove&#10;Paytm repair&#10;price slider&#10;Rating and review done&#10;Facebook share option in the view product">
+      <created>1603757765290</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1603757765290</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,6 +129,10 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="172" y="31" width="1022" height="737" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1603733154844" />
+    <state x="278" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1603757773720">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="278" y="133" width="800" height="535" key="Vcs.Push.Dialog.v2/0.27.1366.741@0.27.1366.741" timestamp="1603757773720" />
     <state x="0" y="27" width="607" height="741" key="find.popup" timestamp="1603756738845">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
