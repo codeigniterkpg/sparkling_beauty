@@ -58,3 +58,51 @@ function multiUploadFile($path, $type, $file_name) {
 function b2b($name, $id, $price) {
     return "https://api.whatsapp.com/send?phone=919321598572&text=".urlencode($name ." id : " . $id . " price : " . $price);
 }
+
+if (!function_exists("message_success")) {
+    function message_success($s, $is_html = true) {
+        if ($is_html === false) {
+            return $s;
+        } else {
+            $s = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong><i class="fa fa-check fa-2x"></i></strong> '.$s.'
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>';
+            return $s;
+        }
+    }
+}
+
+if (!function_exists("message_warning")) {
+    function message_warning($s, $is_html = true) {
+        if ($is_html === false) {
+            return $s;
+        } else {
+            $s = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  <strong><i class="fa fa-warning fa-2x"></i></strong> '.$s.'
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>';
+            return $s;
+        }
+    }
+}
+
+if (!function_exists("message_danger")) {
+    function message_danger($s, $is_html = true) {
+        if ($is_html === false) {
+            return $s;
+        } else {
+            $s = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <strong><i class="fa fa-times-circle fa-2x"></i></strong> '.$s.'
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>';
+            return $s;
+        }
+    }
+}

@@ -33,6 +33,7 @@
 								</ul>
 							</li>-->
 							<li><a href="<?php echo base_url('BackPanel/Color');?>" class="">Color</a></li>
+							<li><a href="<?php echo base_url('BackPanel/ShippingCharge');?>" class="">Shipping Charge</a></li>
 						</ul>
 					</li>
 					<li data-username="product" class="nav-item"><a href="<?php echo base_url('BackPanel/Product');?>" class="nav-link"><span class="pcoded-micon"><i class="feather icon-aperture"></i></span><span class="pcoded-mtext">Product</span></a></li>					
