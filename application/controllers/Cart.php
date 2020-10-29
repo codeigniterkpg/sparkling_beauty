@@ -64,10 +64,11 @@ class Cart extends CI_Controller {
 		}
 		
 		
-		$this->db->select('tbl_color.tclr_title,tbl_size_master.tsm_size,tbl_product.tp_slug,tbl_product.tp_shipping_type,tbl_product.tp_shipping_amount,tbl_product.tp_name,tbl_product.tp_gst_type,tbl_product.tp_gst_perce,tbl_cart.*');		
+		$this->db->select('tbl_color.tclr_title,tbl_size_master.tsm_size,tbl_product.tp_slug,tbl_product.tp_shipping_type,tbl_product.tp_shipping_amount,tbl_product.tp_name,tbl_product.tp_gst_type,tbl_product.tp_gst_perce,tbl_cart.*,tbl_product_data.tpd_weight');
 		$this->db->join('tbl_color', 'tbl_color.tclr_id = tbl_cart.cr_color ','left');		
 		$this->db->join('tbl_size_master', 'tbl_size_master.tsm_id = tbl_cart.cr_size ','left');		
-		$this->db->join('tbl_product', 'tbl_product.tp_id = tbl_cart.cr_product_id ','left');		
+		$this->db->join('tbl_product', 'tbl_product.tp_id = tbl_cart.cr_product_id ','left');
+        $this->db->join("tbl_product_data","tbl_product_data.tpd_product_id=tbl_cart.cr_product_id","INNER");
 		$this->db->where('cr_cust_id',$customer_id);
 		$exe=$this->db->get('tbl_cart');
 		$cart_data=$exe->result_array();
@@ -1079,6 +1080,41 @@ class Cart extends CI_Controller {
     public function PaymentFail() {
 //	    echo "Payment Fail";
         $this->load->view("payment_fail");
+    }
+
+    public function GetShippingCharge() {
+        $res = array("IsSuccess" => FALSE, "Message" => "");
+        if($this->session->userdata('customer_data')) {
+            $cust_id = $this->session->userdata('customer_data')[0]['tc_id'];
+            $state = $this->input->post("state");
+            $shipping_charge = $this->db->where("state", $state)->get("tbl_shipping_charges",1)->row();
+            if (!empty($shipping_charge)) {
+                $carts = $this->db->select("C.*,PD.tpd_weight")
+                    ->where("C.cr_cust_id", $cust_id)
+                    ->join("tbl_product_data as PD","PD.tpd_product_id=C.cr_product_id","INNER")
+                    ->get("tbl_cart as C")->result();
+                if(!empty($carts)) {
+                    $shipping_charge_total = 0;
+                    $shipping_charge = $shipping_charge->shipping_charge;
+                    foreach ($carts as $index => $cart) {
+                        $pro_ship_charge = (($cart->tpd_weight * $shipping_charge) * $cart->cr_qty);
+                        $shipping_charge_total = $shipping_charge_total + $pro_ship_charge;
+                        $carts[$index]->shipping_charge = $pro_ship_charge;
+                    }
+                    $res["IsSuccess"] = TRUE;
+                    $res["Message"] = "Shipping Charge has been counted";
+                    $res["Data"] = $carts;
+                    $res["TotalShippingCharge"] = $shipping_charge_total;
+                } else {
+                    $res["Message"] = "Your Cart is empty!";
+                }
+            } else {
+                $res["Message"] = "PLease select valid state";
+            }
+        } else {
+            $res["Message"] = "Please login first!";
+        }
+        echo json_encode($res);
     }
 }
 ?>

@@ -88,7 +88,7 @@ class Product extends CI_Controller
 						<label>Promotion Price</label>
 						<input name="promotion_price[]" id="promotion_price[]" type="text" placeholder="Promotion Price" class="form-control"/>
 					</div>
-					<div class="form-group col-md-1">
+					<div class="form-group col-md-1 " style="display: none;">
 						<label for="exampleInputname"></label><br>';
         if ($cnt == 1) {
             $html .= '<input type="button" class="btn btn-success" onclick="add_new_div()" value="+"/>';
@@ -148,7 +148,7 @@ class Product extends CI_Controller
 						<label>Promotion Price</label>
 						<input name="promotion_price[]" id="promotion_price" type="text" placeholder="Promotion Price" class="form-control" value="' . $dts['promotion_price'] . '"/>
 					</div>
-					<div class="form-group col-md-1">
+					<div class="form-group col-md-1" style="display: none;">
 						<label for="exampleInputname"></label><br>';
             if ($cnt == $len) {
                 $html .= '<input type="button" class="btn btn-success" onclick="add_new_div()" value="+"/>';

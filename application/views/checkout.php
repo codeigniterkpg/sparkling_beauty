@@ -134,15 +134,18 @@
 																	}
 																	?>
                                                                 <tr class="cart_item">
-                                                                    <td class="product-name"><?php echo $cd['tp_name'];?><strong> x <?php echo $cd['cr_qty'];?></strong></td>
+                                                                    <td class="product-name"><?php echo $cd['tp_name'];?></strong> <br />
+                                                                        <code>Qty : <?= $cd['cr_qty']; ?></code> <br />
+                                                                        <code>Weight : <?= $cd['tpd_weight']; ?></code>
+                                                                    </td>
                                                                     <td class="product-total">
                                                                         <span class="product-price-amount amount"><span class="currency-sign">₹</span><?php echo $amount;?></span>
                                                                     </td>
                                                                 </tr>
                                                                  <?php 
-																 if($cd['tp_shipping_type']==1){
+																 /*if($cd['tp_shipping_type']==1){
 																	 $shipping=$shipping+($cd['tp_shipping_amount']*$cd['cr_qty']);
-																 }
+																 }*/
 																 $total=$total+$cd['cr_amount'];
 																 $sub_total=$sub_total+$amount;
 																 $tax=$tax+$cd['cr_gst_amount'];
@@ -164,24 +167,19 @@
 																<tr class="shipping">
                                                                     <th>Shipping</th>
                                                                     <td>
-                                                                        <ul id="shipping_method">
-                                                                            
-                                                                            <li>
-                                                                                <label for="shipping_method_0_legacy_free_shipping"><?php echo $shipping;?></label>
-                                                                            </li>
-                                                                          
-                                                                        </ul>
+                                                                        <label id="shipping_method"></label>
                                                                     </td>
                                                                 </tr>
                                                                 <tr class="order-total">
                                                                     <th>Total</th>
                                                                     <td>
-                                                                        <span class="product-price-amount amount"><span class="currency-sign">₹</span><?php echo $total+$shipping;?></span>
-																		<input type="hidden" name="total" value="<?php echo $total+$shipping;?>">
+                                                                        <span class="product-price-amount amount product-price-amount-display"><span class="currency-sign">₹</span><?php echo $total/*+$shipping*/;?></span>
+																		<input type="hidden" name="total" value="<?php echo $total/*+$shipping*/;?>" id="_total_plus_shipping">
+																		<input type="hidden" value="<?php echo $total;?>" id="_total">
 																		<input type="hidden" name="sub_total" value="<?php echo $sub_total;?>">
 																		<input type="hidden" name="tax" value="<?php echo $tax;?>">
 																		<input type="hidden" name="discount" value="0">
-																		<input type="hidden" name="shipping" value="<?php echo $shipping;?>">
+																		<input type="hidden" name="shipping" value="<?php echo $shipping;?>" id="_shipping">
 																	</td>
                                                                 </tr>
                                                             </tfoot>
@@ -207,7 +205,7 @@
                                                         </ul>-->
                                                         <input  id="payment_method_cod" name="payment_method" value="paytm" type="hidden" />
                                                         <div class="place-order">
-                                                            <button class="btn btn-lg btn-color form-full-width" type="submit" value="<?php echo ($total+$shipping);?>" style="font-weight: 700">Pay <i class="fa fa-rupee"></i> <?php echo ($total+$shipping);?></button>
+                                                            <button class="btn btn-lg btn-color form-full-width" type="submit" value="<?php echo ($total+$shipping);?>" style="font-weight: 700">Pay <i class="fa fa-rupee"></i> </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -303,4 +301,41 @@ $( document ).ready( function () {
 				}
 			} );
 		} );
+
+function add_shipping_charge() {
+    let $PAY_BUTTON = $('[type="submit"]');
+    let $DISPLAY_SHIPPING = $("#shipping_method");
+    let $SET_TOTAL = $("#_total_plus_shipping");
+    let $SET_TOTAL_SHIPPING = $(".product-price-amount-display");
+    let $GET_TOTAL = $("#_total").val();
+    let $SET_SHIPPING = $("#_shipping");
+    let $SUBMIT_BUTTON = $("[type='submit']");
+    $.ajax({
+        url: '<?php echo base_url('Cart/GetShippingCharge');?>',
+        type: "POST",
+        data : { state : $("#tca_state").val() },
+        dataType: 'json',
+        success: function (response) {
+            hideload();
+            if (response.IsSuccess === true) {
+                toast_msg('Success',response.Message,'success');
+                $PAY_BUTTON.show();
+                $DISPLAY_SHIPPING.text(response.TotalShippingCharge);
+                $SET_SHIPPING.val(response.TotalShippingCharge);
+                $SET_TOTAL.val(parseFloat($GET_TOTAL) + parseFloat(response.TotalShippingCharge));
+                $SET_TOTAL_SHIPPING.html('<span class="currency-sign">₹</span> ' + (parseFloat($GET_TOTAL) + parseFloat(response.TotalShippingCharge)));
+                $SUBMIT_BUTTON.val((parseFloat($GET_TOTAL) + parseFloat(response.TotalShippingCharge)));
+                $SUBMIT_BUTTON.html('Pay <i class="fa fa-rupee"></i> ' + (parseFloat($GET_TOTAL) + parseFloat(response.TotalShippingCharge)));
+            } else {
+                toast_msg('Error',response.Message,'error');
+                $PAY_BUTTON.hide();
+            }
+
+        }
+    });
+}
+$("#tca_state").change(function() {
+    add_shipping_charge();
+});
+add_shipping_charge();
 </script>
