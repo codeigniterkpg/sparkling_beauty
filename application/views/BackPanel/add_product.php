@@ -332,8 +332,11 @@
 
         /* ------------ Add New Elements Start------------------ */
         let UriSegment = "<?php echo $this->uri->segment(3)?>";
-        if (UriSegment === 'AddProduct') {
-            add_new_div();
+        if (UriSegment === 'AddProduct' || UriSegment === 'edit') {
+            let PriceLength = $("#size_div").find("select").length;
+            if (PriceLength === 0) {
+                add_new_div();
+            }
         }
         function add_new_div() {
 
