@@ -200,7 +200,7 @@
                                                             </select>
                                                         </div>
                                                     </div>-->
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6" style="display: none;">
                                                         <div class="form-group">
                                                             <label for="exampleInputname">Shipping Charge</label>
                                                             <input type="text" id="shipping_charge" required
