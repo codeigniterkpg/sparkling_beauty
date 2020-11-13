@@ -106,7 +106,7 @@
                                         <span data-value="-" class="quantity-btn quantityMinus"></span>
                                     </div>
                                     <!--add_to_cart(<?php /*echo $Detail[0]['tp_id'];*/?>)-->
-                                    <button type="button" onclick="return add_to_cart(<?php echo $Detail[0]['tp_id']?>,'<?php echo $final_price;?>','<?php echo $prices;?>','<?php echo $gst_amount?>','<?php echo $Detail[0]['tp_gst_type']?>','<?php echo $Detail[0]['tp_gst_perce']?>')" class="btn btn-lg btn-black"><i class="fa fa-shopping-bag" aria-hidden="true"></i>Add to cart 1</button>
+                                    <button type="button" onclick="return add_to_cart(<?php echo $Detail[0]['tp_id']?>,'<?php echo $final_price;?>','<?php echo $prices;?>','<?php echo $gst_amount?>','<?php echo $Detail[0]['tp_gst_type']?>','<?php echo $Detail[0]['tp_gst_perce']?>')" class="btn btn-lg btn-black"><i class="fa fa-shopping-bag" aria-hidden="true"></i>Add to cart</button>
                                     <?php $link = b2b($Detail[0]['tp_name'], $Detail[0]['tp_id'], $final_price);?>
                                     <a href="<?= $link;?>" target="_blank" class="btn-lg text-white" style="background: #0000cc; padding: 8px 20px !important; border-radius: 30px;"><i class="fa fa-whatsapp"></i>B2B Inquiry</a>
                                     <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
