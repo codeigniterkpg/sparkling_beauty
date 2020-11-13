@@ -13,7 +13,7 @@
                         <div class="col-12">
                             <nav class="breadcrumb-link">
                                 <a href="<?php echo base_url();?>">Home</a>
-                                <a href="#"><?php echo ucfirst($Detail[0]['cat_name']);?></a>
+                                <a href="#"><?php echo ucfirst(isset($Detail) ? $Detail[0]['cat_name'] : '');?></a>
                                 <span><?php echo $Detail[0]['tp_name'];?></span>
                             </nav>
                         </div>
@@ -33,14 +33,15 @@
                             <div class="product-page-image">
                                 <!-- Slick Image Slider -->
                                 <div class="product-image-slider product-image-gallery" id="product-image-gallery" data-pswp-uid="3">
-                                    <?php 
+                                    <?php
+                                    if (isset($Images)) {
 									foreach($Images as $img){?>
 									<div class="item">
                                         <a class="product-gallery-item" href="<?php echo base_url('uploads/product/').$img['tpi_image'];?>" data-size="" data-med="<?php echo base_url('uploads/product/').$img['tpi_image'];?>" data-med-size="">
                                             <img src="<?php echo base_url('uploads/product/').$img['tpi_image'];?>" alt="image 1" />
                                         </a>
                                     </div>
-									<?php } ?>
+									<?php } }?>
                                 </div>
                                 <!-- End Slick Image Slider -->
 
@@ -105,7 +106,7 @@
                                         <span data-value="-" class="quantity-btn quantityMinus"></span>
                                     </div>
                                     <!--add_to_cart(<?php /*echo $Detail[0]['tp_id'];*/?>)-->
-                                    <button type="button" onclick="add_to_cart(<?php echo $Detail[0]['tp_id']?>,'<?php echo $final_price;?>','<?php echo $prices;?>','<?php echo $gst_amount?>','<?php echo $Detail[0]['tp_gst_type']?>','<?php echo $Detail[0]['tp_gst_perce']?>')" class="btn btn-lg btn-black"><i class="fa fa-shopping-bag" aria-hidden="true"></i>Add to cart</button>
+                                    <button type="button" onclick="return add_to_cart(<?php echo $Detail[0]['tp_id']?>,'<?php echo $final_price;?>','<?php echo $prices;?>','<?php echo $gst_amount?>','<?php echo $Detail[0]['tp_gst_type']?>','<?php echo $Detail[0]['tp_gst_perce']?>')" class="btn btn-lg btn-black"><i class="fa fa-shopping-bag" aria-hidden="true"></i>Add to cart 1</button>
                                     <?php $link = b2b($Detail[0]['tp_name'], $Detail[0]['tp_id'], $final_price);?>
                                     <a href="<?= $link;?>" target="_blank" class="btn-lg text-white" style="background: #0000cc; padding: 8px 20px !important; border-radius: 30px;"><i class="fa fa-whatsapp"></i>B2B Inquiry</a>
                                     <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
@@ -249,11 +250,12 @@
 												$price=$lt['tp_price'];
 											}
 										if($lt['tp_gst_type']==2){
-											$gst_amount=round($price*$lt['tp_gst_perce']/100);
+											$gst_amount=round($price * $lt['tp_gst_perce']/100);
 											$final_price=$price;
 										}else{
-											$gst_amount=round($price*$lt['tp_gst_perce']/100);
-											$final_price=$price+$gst_amount;
+
+											$gst_amount=round(floatval($price[0]) * floatval($lt['tp_gst_perce']) / 100);
+											$final_price = floatval($price[0]) + $gst_amount;
 										}
 											?>
                                 
@@ -271,7 +273,7 @@
 											<?php if(isset($lt['tp_size_category']) && $lt['tp_size_category']>0){?>
                                                 <a href="<?php echo base_url('shop/').$lt['tp_slug'];?>" class="js_tooltip" data-mode="bottom" data-tip="Select Option"><i class="fa fa-shopping-bag"></i></a>
 											<?php }else{ ?>
-												<a href="javascript:void(0)" onclick="add_to_cart_related(<?php echo $lt['tp_id']?>,'<?php echo $final_price;?>','<?php echo $price;?>','<?php echo $gst_amount?>','<?php echo $lt['tp_gst_type']?>','<?php echo $lt['tp_gst_perce']?>')" class="js_tooltip" data-mode="bottom" data-tip="Add to Cart"><i class="fa fa-shopping-bag"></i></a>
+												<a href="javascript:void(0)" onclick="add_to_cart_related(<?php echo $lt['tp_id']?>,'<?php echo $final_price;?>','<?php echo $price[0];?>','<?php echo $gst_amount?>','<?php echo $lt['tp_gst_type']?>','<?php echo $lt['tp_gst_perce']?>')" class="js_tooltip" data-mode="bottom" data-tip="Add to Cart"><i class="fa fa-shopping-bag"></i></a>
 											<?php } ?>
 											<?php $customer_data=$this->session->userdata('customer_data');
 												if(!empty($customer_data)){
@@ -318,7 +320,39 @@
         <!-- End Page Content Wraper -->
 
 <?php include("footer.php");?>
-<script>
+<script type="text/javascript">
+    function add_to_cart(id, price, mrp, gst_amount, gst_type, gst_perce) {
+        var qty = 1;
+        var sz = 0;
+        var color = 0;
+        showload();
+        $.ajax({
+            url: '<?php echo base_url('Cart/AddCart');?>',
+            type: "POST",
+            data: {
+                id: id,
+                price: price,
+                qty: qty,
+                sz: sz,
+                color: color,
+                mrp: mrp,
+                gst_amount: gst_amount,
+                gst_type: gst_type,
+                gst_perce: gst_perce
+            },
+            dataType: 'json',
+            success: function (response) {
+                hideload();
+                if (response.status == true) {
+                    get_cart_data();
+                    toast_msg("Success", response.message, "success");
+                } else {
+                    get_cart_data();
+                    toast_msg("Error", response.message, "error");
+                }
+            }
+        });
+    }
 function add_to_cart_related(id,price,mrp,gst_amount,gst_type,gst_perce){
 	var qty=1;
 	var sz=0;
@@ -341,59 +375,8 @@ function add_to_cart_related(id,price,mrp,gst_amount,gst_type,gst_perce){
       }
     });
 }
-function add_to_cart(id){
-	var qty=$("#prod_qty").val();
-	var price=$("#price_product").val();
-	var sz=$("#select-size").val();
-	var color=$("#select-color").val();
-	var gst_type=$("#gst_type").val();
-	var gst_perce=$("#gst_perce").val();
-	var gst_amount=$("#gst_amount").val();
-	var product_price=$("#product_price").val();
-	<?php if(isset($Detail[0]['tp_size_category']) && $Detail[0]['tp_size_category']>0){?>
-	if(sz>0 && color>0){
-		showload();
-		 $.ajax({
-		  url: '<?php echo base_url('Cart/AddCart');?>',
-		  type: "POST",
-		  data: {id: id,price:price,qty:qty,sz:sz,color:color,mrp:product_price,gst_amount:gst_amount,gst_type:gst_type,gst_perce:gst_perce},
-		  dataType: 'json',
-		  success: function (response) {
-			hideload();
-			if (response.status == true) {
-			  get_cart_data();
-			  toast_msg("Success",response.message,"success");
-			} else {
-			  get_cart_data(); 
-			  toast_msg("Error",response.message,"error");
-			}
-		  }
-		});
-	}else{
-		alert("Please select size and color for buying this product")
-	}
-	<?php }else{ ?>
-		var sz=0;
-	var color=0;
-		showload();
-		 $.ajax({
-		  url: '<?php echo base_url('Cart/AddCart');?>',
-		  type: "POST",
-		  data: {id: id,price:price,qty:qty,sz:sz,color:color,mrp:product_price,gst_amount:gst_amount,gst_type:gst_type,gst_perce:gst_perce},
-		  dataType: 'json',
-		  success: function (response) {
-			hideload();
-			if (response.status == true) {
-			  get_cart_data();
-			  toast_msg("Success",response.message,"success");
-			} else {
-			  get_cart_data(); 
-			  toast_msg("Error",response.message,"error");
-			}
-		  }
-		});
-	<?php } ?>
-}
+
+
 function getColors(id,prod){
 	showload();
 	$.ajax({
