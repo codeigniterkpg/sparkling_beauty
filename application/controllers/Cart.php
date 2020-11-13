@@ -1097,7 +1097,7 @@ class Cart extends CI_Controller {
                     $shipping_charge_total = 0;
                     $shipping_charge = $shipping_charge->shipping_charge;
                     foreach ($carts as $index => $cart) {
-                        $pro_ship_charge = ((ceil($cart->tpd_weight) * $shipping_charge) * $cart->cr_qty);
+                        $pro_ship_charge = ((ceil($cart->tpd_weight * $cart->cr_qty) * $shipping_charge));
                         $shipping_charge_total = $shipping_charge_total + $pro_ship_charge;
                         $carts[$index]->shipping_charge = $pro_ship_charge;
                     }

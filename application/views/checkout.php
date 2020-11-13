@@ -136,7 +136,7 @@
                                                                 <tr class="cart_item">
                                                                     <td class="product-name"><?php echo $cd['tp_name'];?></strong> <br />
                                                                         <code>Qty : <?= $cd['cr_qty']; ?></code> <br />
-                                                                        <code>Weight : <?= $cd['tpd_weight']; ?></code>
+                                                                        <code>Weight : <?= $cd['tpd_weight']; ?> x <?= $cd['cr_qty']; ?> = <?= ($cd['tpd_weight'] *  $cd['cr_qty']); ?> KG</code>
                                                                     </td>
                                                                     <td class="product-total">
                                                                         <span class="product-price-amount amount"><span class="currency-sign">₹</span><?php echo $amount;?></span>
